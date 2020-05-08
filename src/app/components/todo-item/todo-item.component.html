@@ -1,0 +1,41 @@
+<li class="todo-item">
+  <div class="todo-item__content">
+    <span [class.done]="todo.completed">
+      <mat-checkbox
+        *ngIf="!isEditing"
+        class="todo-item__checkbox"
+        [checked]="todo.completed"
+        (change)="onChange(todo.id)"
+      ></mat-checkbox>
+      <span
+        *ngIf="!isEditing"
+        (dblclick)="handleEdit()"
+        class="todo-item__title"
+      >
+        {{ todo.title }}
+      </span>
+    </span>
+    <div *ngIf="isEditing" class="todo-item__edit-container">
+      <input
+        matInput
+        #inputEl
+        [(ngModel)]="title"
+        class="todo-item__edit"
+        type="text"
+        (keyup.enter)="submitEdit()"
+        (blur)="submitEdit()"
+      />
+      <button mat-icon-button (click)="submitEdit()">
+        <mat-icon mat-icon-button>check</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="todo__action" *ngIf="!isEditing">
+    <button mat-icon-button>
+      <mat-icon (click)="handleEdit()">edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="deleteTodo(todo.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</li>

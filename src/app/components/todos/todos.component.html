@@ -1,0 +1,47 @@
+<div *ngIf="!loading">
+  <div class="form">
+    <div class="form__search-filters">
+      <div class="form__search">
+        <mat-form-field>
+          <input
+            class="form__input"
+            [(ngModel)]="searchString"
+            matInput
+            #inputEl
+            placeholder="Search todo by title..."
+            (keyup.escape)="clearSearch()"
+          />
+          <button
+            *ngIf="searchString"
+            mat-button
+            matSuffix
+            mat-icon-button
+            (click)="clearSearch()"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="form__filters">
+        <app-filter
+          (completedFilterEvent)="changeCompletedFilter($event)"
+        ></app-filter>
+      </div>
+    </div>
+    <ul *ngIf="todosService.todos.length; else noTodos">
+      <div
+        *ngFor="
+          let todo of todosService.todos
+            | completed: completedFilter
+            | todosSearch: searchString
+        "
+      >
+        <app-todo-item [todo]="todo"></app-todo-item>
+      </div>
+    </ul>
+    <ng-template #noTodos>
+      <p style="text-align: center;">No todos now!</p>
+    </ng-template>
+  </div>
+  <p *ngIf="loading">Loading...</p>
+</div>

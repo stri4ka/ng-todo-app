@@ -1,0 +1,40 @@
+<form
+  class="modal"
+  class="form"
+  (ngSubmit)="addTodo()"
+  [formGroup]="addForm"
+  class="add-todo"
+  #formDir="ngForm"
+>
+  <div class="modal__header">
+    <h2 mat-dialog-title>Add todo</h2>
+  </div>
+  <div class="modal__content">
+    <mat-form-field>
+      <mat-label>Todo title</mat-label>
+      <input
+        matInput
+        type="text"
+        name="title"
+        formControlName="title"
+        placeholder="e.g. Conquer the world!"
+        autocomplete="off"
+        #inputEl
+      />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="addForm.invalid"
+      (click)="addTodo(); inputEl.value = ''"
+    >
+      Add
+    </button>
+    <button mat-raised-button id="modal-cancel-button" (click)="closeModal()">
+      Cancel
+    </button>
+  </div>
+</form>
