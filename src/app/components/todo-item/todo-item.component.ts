@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Todo, TodosService } from '../../shared/services/todos.service';
 
 @Component({
@@ -6,37 +6,35 @@ import { Todo, TodosService } from '../../shared/services/todos.service';
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.scss'],
 })
-export class TodoItemComponent {
+export class TodoItemComponent implements OnInit {
   @Input() todo: Todo;
-  public loading: boolean = true;
-  public searchString = '';
-  public title: string = '';
+  searchString = '';
+  title = '';
   oldTodo: Todo;
   isEditing = false;
 
-  constructor(public todosService: TodosService) {}
+  constructor(private todosService: TodosService) {}
 
   ngOnInit() {
     this.title = this.todo.title;
-    this.loading = false;
   }
 
-  onChange(id: number) {
-    this.todosService.onToggle(id);
+  onChange() {
+    this.todosService.onToggle(this.todo.id);
   }
 
-  deleteTodo(id: number) {
-    this.todosService.deleteTodo(id);
+  deleteTodo() {
+    this.todosService.deleteTodo(this.todo.id);
   }
 
-  handleEdit(): void {
+  handleEdit() {
     this.isEditing = true;
     this.oldTodo = { ...this.todo };
   }
 
-  submitEdit(): void {
+  submitEdit() {
     this.isEditing = false;
     this.todo.title = this.title;
-    this.todosService.updateTodo(this.todo.id, this.todo);
+    this.todosService.updateTodo(this.todo);
   }
 }

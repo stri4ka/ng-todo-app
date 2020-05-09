@@ -5,7 +5,7 @@ import { Todo } from '../services/todos.service';
 @Pipe({
   name: 'completed',
 })
-export class CompletedPipe implements PipeTransform {
+export class CompletedPipe implements PipeTransform { // it's not better name
   transform(todos: Todo[], filter: string): Todo[] {
     switch (filter) {
       case 'all':

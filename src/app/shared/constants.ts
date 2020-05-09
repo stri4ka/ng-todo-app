@@ -1,1 +1,1 @@
-export const base_URL = 'https://jsonplaceholder.typicode.com/todos?_limit=9';
+export const BASE_URL = 'https://jsonplaceholder.typicode.com/todos?_limit=9';

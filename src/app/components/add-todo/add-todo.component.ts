@@ -8,7 +8,7 @@ import { ModalComponent } from '../../components/modal/modal.component';
   styleUrls: ['./add-todo.component.scss'],
 })
 export class AddTodoComponent implements OnInit {
-  constructor(public matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit() {}
 
@@ -18,6 +18,6 @@ export class AddTodoComponent implements OnInit {
     dialogConfig.id = 'modal-component';
     dialogConfig.height = '300px';
     dialogConfig.width = '400px';
-    const modalDialog = this.matDialog.open(ModalComponent, dialogConfig);
+    this.matDialog.open(ModalComponent, dialogConfig);
   }
 }

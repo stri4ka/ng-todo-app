@@ -1,10 +1,7 @@
 <form
-  class="modal"
-  class="form"
-  (ngSubmit)="addTodo()"
+  class="add-todo modal form"
   [formGroup]="addForm"
-  class="add-todo"
-  #formDir="ngForm"
+  (submit)="addTodo()"
 >
   <div class="modal__header">
     <h2 mat-dialog-title>Add todo</h2>
@@ -19,7 +16,6 @@
         formControlName="title"
         placeholder="e.g. Conquer the world!"
         autocomplete="off"
-        #inputEl
       />
     </mat-form-field>
   </div>
@@ -29,7 +25,6 @@
       color="primary"
       type="submit"
       [disabled]="addForm.invalid"
-      (click)="addTodo(); inputEl.value = ''"
     >
       Add
     </button>
