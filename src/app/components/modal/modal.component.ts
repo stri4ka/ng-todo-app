@@ -40,15 +40,10 @@ export class ModalComponent implements OnInit {
     };
 
     this.todosService.addTodo(todo);
-    this.resetForm();
     this.dialogRef.close();
   }
 
-  resetForm(): void {
-    this.inputEl.nativeElement.blur();
-    this.formDir.resetForm();
-
-    this.addForm.reset();
-    this.addForm.updateValueAndValidity();
+  reset() { // not used, just for example how to reset reactive form
+    this.addForm.patchValue({ title: ''});
   }
 }

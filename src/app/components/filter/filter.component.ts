@@ -14,12 +14,6 @@ export class FilterComponent {
 
   constructor(public todosService: TodosService) {}
 
-  ngOnInit(): void {
-    this.todosService.fetchTodos().subscribe((todos) => {
-      this.todosService.todos = todos;
-    });
-  }
-
   onCompletedFilterChange(): void {
     this.completedFilterEvent.emit(this.completedFilter);
   }
