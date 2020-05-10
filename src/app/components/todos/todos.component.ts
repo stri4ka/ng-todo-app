@@ -1,42 +1,28 @@
-import { Component } from '@angular/core';
-import { TodosService } from '../../shared/services/todos.service';
+import { Component, OnInit } from '@angular/core';
+import { Todo, TodosService } from '../../shared/services/todos.service';
 
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.scss'],
 })
-export class TodosComponent {
-  public loading: boolean = true;
-  public searchString = '';
-  public isEditing = false;
-  completedFilter: string = 'all';
+export class TodosComponent implements OnInit {
+  loading = true;
+  searchString = '';
+  isEditing = false;
+  completedFilter = 'all';
+  todoList: Todo[];
 
   constructor(public todosService: TodosService) {}
 
   ngOnInit() {
-    this.todosService.getTodos().subscribe(() => {
+    this.todosService.getTodos().subscribe((todos) => {
       this.loading = false;
+      this.todoList = todos;
     });
   }
 
-  onChange(id: number) {
-    this.todosService.onToggle(id);
-  }
-
-  deleteTodo(id: number) {
-    this.todosService.deleteTodo(id);
-  }
-
-  handleEdit(id: number): void {
-    this.isEditing = true;
-  }
-
-  submitEdit(): void {
-    this.isEditing = false;
-  }
-
-  changeCompletedFilter(value: string): void {
+  changeCompletedFilter(value: string) {
     this.completedFilter = value;
   }
 

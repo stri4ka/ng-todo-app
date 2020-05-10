@@ -11,7 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { TodosComponent } from './components/todos/todos.component';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { TodosSearchPipe } from './shared/pipes/todos-search.pipe';
-import { CompletedPipe } from './shared/pipes/completed.pipe';
+import { TodoCompletedPipe } from './shared/pipes/todos-completed.pipe';
 import { FilterComponent } from './components/filter/filter.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 
@@ -35,7 +35,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     TodosComponent,
     AddTodoComponent,
     TodosSearchPipe,
-    CompletedPipe,
+    TodoCompletedPipe,
     FilterComponent,
     TodoItemComponent,
     ModalComponent,

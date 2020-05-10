@@ -28,11 +28,11 @@
         ></app-filter>
       </div>
     </div>
-    <ul *ngIf="todosService.todos.length; else noTodos">
+    <ul *ngIf="todoList.length; else noTodos">
       <div
         *ngFor="
-          let todo of todosService.todos
-            | completed: completedFilter
+          let todo of todoList
+            | todoCompleted: completedFilter
             | todosSearch: searchString
         "
       >

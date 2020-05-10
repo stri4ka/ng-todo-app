@@ -3,9 +3,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Todo } from '../services/todos.service';
 
 @Pipe({
-  name: 'completed',
+  name: 'todoCompleted',
 })
-export class CompletedPipe implements PipeTransform {
+export class TodoCompletedPipe implements PipeTransform {
   transform(todos: Todo[], filter: string): Todo[] {
     switch (filter) {
       case 'all':
