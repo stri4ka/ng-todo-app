@@ -26,10 +26,6 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  closeModal() {
-    this.dialogRef.close();
-  }
-
   addTodo() {
     const todo: Todo = {
       userId: 1,

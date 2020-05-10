@@ -1,30 +1,30 @@
 .done {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .todo-item {
+  display: flex;
+  align-items: center;
+
+  &__checkbox {
+    margin-right: 1rem;
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+
+  &__action {
     display: flex;
     align-items: center;
+  }
 
-    &__checkbox {
-        margin-right: 1rem;
-    }
+  &__edit-container {
+    display: flex;
+  }
 
-    &__content {
-        flex-grow: 1;
-    }
-
-    &__action {
-        display: flex;
-        align-items: center;
-    }
-
-    &__edit-container {
-        display: flex;
-    }
-
-    &__edit {
-        padding: 0 1rem;
-        background-color: #eee;
-    }
+  &__edit {
+    padding: 0 1rem;
+    background-color: #eee;
+  }
 }
