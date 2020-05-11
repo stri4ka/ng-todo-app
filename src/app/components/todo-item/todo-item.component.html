@@ -6,7 +6,7 @@
         [checked]="todo.completed"
         (change)="onChange()"
       ></mat-checkbox>
-      <span (dblclick)="handleEdit()" class="todo-item__title">
+      <span (dblclick)="handleEdit()">
         {{ todo.title }}
       </span>
     </span>
@@ -25,8 +25,11 @@
     </div>
   </div>
   <div class="todo__action" *ngIf="!isEditing">
-    <button mat-icon-button>
-      <mat-icon (click)="handleEdit()">edit</mat-icon>
+    <span class="todo-item__date">
+      {{ todo.dueDate | date: "mediumDate" }}
+    </span>
+    <button mat-icon-button (click)="openModal()">
+      <mat-icon>edit</mat-icon>
     </button>
     <button mat-icon-button (click)="deleteTodo()">
       <mat-icon>delete</mat-icon>

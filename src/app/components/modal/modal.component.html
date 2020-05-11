@@ -1,12 +1,7 @@
 <div class="modal__header">
   <h2 mat-dialog-title>Add todo</h2>
 </div>
-<form
-  class="add-todo modal form"
-  [formGroup]="addForm"
-  #formDir="ngForm"
-  (submit)="addTodo()"
->
+<form class="add-todo modal form" [formGroup]="addForm" (submit)="save()">
   <div class="modal__content">
     <mat-form-field>
       <mat-label>Todo title</mat-label>
@@ -19,6 +14,17 @@
         autocomplete="off"
       />
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Choose a due date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        name="dueDate"
+        formControlName="dueDate"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button
@@ -29,7 +35,7 @@
     >
       Add
     </button>
-    <button mat-raised-button matDialogClose>
+    <button mat-raised-button matDialogClose (click)="close()">
       Cancel
     </button>
   </div>

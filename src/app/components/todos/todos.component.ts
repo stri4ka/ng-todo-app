@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo, TodosService } from '../../shared/services/todos.service';
+import { TodosService } from '../../shared/services/todos.service';
+import { ITodo } from '../../shared/interfaces/ITodo';
 
 @Component({
   selector: 'app-todos',
@@ -11,7 +12,7 @@ export class TodosComponent implements OnInit {
   searchString = '';
   isEditing = false;
   completedFilter = 'all';
-  todoList: Todo[];
+  todoList: ITodo[];
 
   constructor(public todosService: TodosService) {}
 

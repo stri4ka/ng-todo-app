@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Todo, TodosService } from '../../shared/services/todos.service';
+import { TodosService } from '../../shared/services/todos.service';
+import { ITodo } from '../../shared/interfaces/ITodo';
+import { IForm } from '../../shared/interfaces/IForm';
+import { ModalComponent } from '../modal/modal.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-todo-item',
@@ -7,13 +11,16 @@ import { Todo, TodosService } from '../../shared/services/todos.service';
   styleUrls: ['./todo-item.component.scss'],
 })
 export class TodoItemComponent implements OnInit {
-  @Input() todo: Todo;
+  @Input() todo: ITodo;
   searchString = '';
   title = '';
-  oldTodo: Todo;
+  oldTodo: ITodo;
   isEditing = false;
 
-  constructor(private todosService: TodosService) {}
+  constructor(private todosService: TodosService, public dialog: MatDialog) {
+    // this.addForm.patchValue({ title: '' });
+    // this.dialog.patchValue({ title: this.todo.title });
+  }
 
   ngOnInit() {
     this.title = this.todo.title;
@@ -32,9 +39,32 @@ export class TodoItemComponent implements OnInit {
     this.oldTodo = { ...this.todo };
   }
 
-  submitEdit() {
+  submitEdit(result: IForm) {
     this.isEditing = false;
     this.todo.title = this.title;
     this.todosService.updateTodo(this.todo);
   }
+
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.id = 'modal-component';
+    dialogConfig.height = '300px';
+    dialogConfig.width = '400px';
+    // dialogConfig.data = 'title';
+    const modal = this.dialog.open(ModalComponent, dialogConfig);
+
+    modal.afterClosed().subscribe((result: IForm) => this.submitEdit(result));
+  }
+
+  // openModal(title, dueDate) {
+  //   const modal = this.dialog.open(ModalComponent, {
+  //     data: {
+  //       title,
+  //       dueDate,
+  //       modalTitle: 'Edit your task',
+  //     },
+  //   });
+  //   modal.afterClosed().subscribe((result: IForm) => this.submitEdit(result));
+  // }
 }

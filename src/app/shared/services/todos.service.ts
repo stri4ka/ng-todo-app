@@ -3,25 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 import { BASE_URL } from '../constants';
-
-export interface Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-  date?: any;
-}
+import { ITodo } from '../interfaces/ITodo';
 
 @Injectable({ providedIn: 'root' })
 export class TodosService {
-  todos = new BehaviorSubject<Todo[]>([]);
+  todos = new BehaviorSubject<ITodo[]>([]);
 
   constructor(private http: HttpClient) {}
 
-  getTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(`${BASE_URL}`).pipe(
+  getTodos(): Observable<ITodo[]> {
+    return this.http.get<ITodo[]>(`${BASE_URL}`).pipe(
       tap((todos) => {
-        const localTodos: Todo[] =
+        const localTodos: ITodo[] =
           JSON.parse(localStorage.getItem('todos')) ?? [];
 
         todos.forEach((todo) => {
@@ -44,14 +37,14 @@ export class TodosService {
     localStorage.setItem('todos', JSON.stringify(this.todos.value));
   }
 
-  addTodo(todo: Todo) {
+  addTodo(todo: ITodo) {
     const todos = this.todos.value;
     todos.push(todo);
     this.todos.next(todos);
     localStorage.setItem('todos', JSON.stringify(this.todos.value));
   }
 
-  updateTodo(todo: Todo) {
+  updateTodo(todo: ITodo) {
     const todos = this.todos.value;
     const idx = this.todos.value.findIndex((t) => t.id === todo.id);
     todos[idx] = { ...todo };
