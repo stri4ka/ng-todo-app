@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { Todo, TodosService } from '../../shared/services/todos.service';
+import { TodosService } from '../../shared/services/todos.service';
+import { ITodo } from '../../shared/interfaces/ITodo';
 
 @Component({
   selector: 'app-filter',
@@ -8,7 +9,7 @@ import { Todo, TodosService } from '../../shared/services/todos.service';
 })
 export class FilterComponent {
   public completedFilter: string;
-  public todos: Todo[];
+  public todos: ITodo[];
 
   @Output() completedFilterEvent = new EventEmitter<string>();
 

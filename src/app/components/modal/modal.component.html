@@ -1,12 +1,7 @@
 <div class="modal__header">
   <h2 mat-dialog-title>Add todo</h2>
 </div>
-<form
-  class="add-todo modal form"
-  [formGroup]="addForm"
-  #formDir="ngForm"
-  (submit)="addTodo()"
->
+<form class="add-todo modal form" [formGroup]="addForm" (submit)="save()">
   <div class="modal__content">
     <mat-form-field>
       <mat-label>Todo title</mat-label>
@@ -29,7 +24,7 @@
     >
       Add
     </button>
-    <button mat-raised-button matDialogClose>
+    <button mat-raised-button matDialogClose (click)="close()">
       Cancel
     </button>
   </div>

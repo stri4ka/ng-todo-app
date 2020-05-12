@@ -6,7 +6,7 @@
         [checked]="todo.completed"
         (change)="onChange()"
       ></mat-checkbox>
-      <span (dblclick)="handleEdit()" class="todo-item__title">
+      <span (dblclick)="handleEdit()">
         {{ todo.title }}
       </span>
     </span>

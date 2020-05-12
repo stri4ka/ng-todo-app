@@ -27,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ModalComponent } from './components/modal/modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -58,8 +59,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatSelectModule,
     MatDialogModule,
     MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [],
+  providers: [MatNativeDateModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

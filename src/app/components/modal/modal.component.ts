@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Validators, FormBuilder, NgForm } from '@angular/forms';
-import { Todo, TodosService } from '../../shared/services/todos.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IForm } from '../../shared/interfaces/IForm';
 
 @Component({
   selector: 'app-modal',
@@ -9,37 +9,36 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements OnInit {
-  minDate: Date;
-
-  @ViewChild('formDir') private formDir: NgForm;
-  @ViewChild('inputEl') private inputEl: ElementRef;
-
-  addForm = this.fb.group({
-    title: ['', [Validators.maxLength(100), Validators.required]],
-  });
+  title: string;
+  addForm: FormGroup;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) data: any,
     public dialogRef: MatDialogRef<ModalComponent>,
-    private todosService: TodosService,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.addForm = fb.group({
+      title: [
+        '',
+        [
+          Validators.minLength(2),
+          Validators.maxLength(100),
+          Validators.required,
+        ],
+      ],
+    });
+  }
 
   ngOnInit(): void {}
 
-  addTodo() {
-    const todo: Todo = {
-      userId: 1,
+  save() {
+    const result: IForm = {
       title: this.addForm.get('title').value,
-      id: Date.now(),
-      completed: false,
-      date: new Date(),
     };
-
-    this.todosService.addTodo(todo);
-    this.dialogRef.close();
+    this.dialogRef.close(result);
   }
 
-  reset() {
-    this.addForm.patchValue({ title: '' });
+  close() {
+    this.dialogRef.close();
   }
 }
